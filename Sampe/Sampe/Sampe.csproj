@@ -161,9 +161,7 @@
     <Compile Include="Controllers\FormularioOSAtividadesController.cs" />
     <Compile Include="Controllers\FormularioTrocaMoldesController.cs" />
     <Compile Include="Controllers\FormularioTMAtividadesController.cs" />
-    <Compile Include="Controllers\GeralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IActionResult.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MaquinasController.cs" />
     <Compile Include="Controllers\MoldesController.cs" />
@@ -171,14 +169,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805041854564_Sampe040520181554.cs" />
-    <Compile Include="Migrations\201805041854564_Sampe040520181554.Designer.cs">
-      <DependentUpon>201805041854564_Sampe040520181554.cs</DependentUpon>
+    <Compile Include="Migrations\201805090552233_Create.cs" />
+    <Compile Include="Migrations\201805090552233_Create.Designer.cs">
+      <DependentUpon>201805090552233_Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AtividadeOS.cs" />
     <Compile Include="Models\AtividadeTM.cs" />
     <Compile Include="Models\Cargo.cs" />
+    <Compile Include="Models\FormularioMolde.cs" />
     <Compile Include="Models\FormularioOrdemServico.cs" />
     <Compile Include="Models\FormularioOSAtividade.cs" />
     <Compile Include="Models\FormularioTrocaMolde.cs" />
@@ -186,7 +185,6 @@
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Maquina.cs" />
     <Compile Include="Models\Molde.cs" />
-    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SampeContext.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -322,9 +320,7 @@
     <Content Include="Scripts\Sampe.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -388,18 +384,16 @@
     <Content Include="Views\Login\Edit.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\PagInicial.cshtml" />
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Delete.cshtml" />
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Usuarios\Teste.cshtml" />
-    <Content Include="Views\Shared\Menu.cshtml" />
-    <Content Include="Views\Usuarios\AlterarSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Geral\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -415,8 +409,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805041854564_Sampe040520181554.resx">
-      <DependentUpon>201805041854564_Sampe040520181554.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805090552233_Create.resx">
+      <DependentUpon>201805090552233_Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

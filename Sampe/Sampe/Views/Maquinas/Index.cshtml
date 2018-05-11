@@ -8,7 +8,7 @@
 
 <div class="container ">
     <div class="col-xs-12 col-sm-12 col-md-6">
-
+      
         <table class="table table-bordered table-responsive">
             <tr>
                 <th>
@@ -25,8 +25,11 @@
                     </td>
                     <td>
 
-                        <a href="/Maquinas/Edit/@item.MaquinaId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="/Maquinas/Delete/@item.MaquinaId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+
+
+                        @Html.ActionLink("Editar", "Edit", new { id = item.MaquinaId }) |
+                        <!--   @Html.ActionLink("Details", "Details", new { id = item.MaquinaId }) |-->
+                        @Html.ActionLink("Deletar", "Delete", new { id = item.MaquinaId })
                     </td>
                 </tr>
             }

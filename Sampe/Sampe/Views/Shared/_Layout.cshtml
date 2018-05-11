@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,36 +19,29 @@
 <body>
 
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
-
+        <div class="container-fluid">           
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
                 <ul class="nav navbar-nav navbar-right">
                     <!--  <li><a class="disabled">Sileisa Alexandrino</a></li>-->
-                    <li class="dropdown">
-
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            @Session["Nome"].ToString()  @Session["Sobrenome"].ToString()
-                            <span class="caret"></span>
-                        </a>
+                    <li class="dropdown">                       
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sileisa Alexandrino<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="http://localhost:49630/Usuarios/AlterarSenha/ @Session["UsuarioId"].ToString()" >Alterar Senha</a></li>
-                            <li><a href="http://localhost:49630/Usuarios/Details/ @Session["UsuarioId"].ToString()">Meu Perfil</a></li>
+                            <li><a href="myModal" data-toggle="modal" data-target="#myModal">Alterar Senha</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="http://localhost:49630/Login/Login"><span class="glyphicon glyphicon-log-out"></span>  Sair</a></li>
+                            <li><a href="http://localhost:49630/Usuarios/Login"><span class="glyphicon glyphicon-log-out"></span>  Sair</a></li>
                         </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <!--MODAL PARA ALTERAR SENHA
+    <!--MODAL PARA ALTERAR SENHA-->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
-
+            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -64,91 +56,50 @@
             </div>
 
         </div>
-    </div>-->
+    </div>
     <!--MENU LATERAL-->
+
     <div class="  col-xs-4 col-sm-4 col-md-2 " id="menu-lateral">
         <div class="row">
             <div class="side-menu">
 
-                <ul class="nav nav-pills nav-stacked ">
+                <ul class="nav nav-pills nav-stacked">
 
                     <li id="dropdown">
-                        <a class="LinkMenu" data-toggle="collapse" href="#dropdown_a">
+                        <a id="LinkMenu" data-toggle="collapse" href="#dropdown_a">
                             <span class="glyphicon glyphicon-wrench"></span> Manutenção
                         </a>
                         <!-- Dropdown level 1 -->
                         <div id="dropdown_a" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <ul class="nav">
-
-                                    <li id="dropdown">
-                                        <a class="LinkMenu" data-toggle="collapse" href="#TM">
-                                            Troca de Molde
-                                        </a>
-                                        <!-- Dropdown level 1 -->
-                                        <div id="TM" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <ul class="nav">
-                                                    <li><a class="LinkMenu" href="/FormularioTMAtividades/Create">Cadastrar Formulário de Troca de Molde</a></li>
-                                                    <li><a class="LinkMenu" href="/FormularioTrocaMoldes/Index">Formulários de Troca de Molde</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li id="dropdown">
-                                        <a class="LinkMenu" data-toggle="collapse" href="#OS">
-                                            Ordem de Serviço
-                                        </a>
-                                        <!-- Dropdown level 1 -->
-                                        <div id="OS" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <ul class="nav">
-                                                    <li><a class="LinkMenu" href="/FormularioOSAtividades/Create">Cadastrar Formulário de Ordem de Serviço</a></li>
-                                                    <li><a class="LinkMenu" href="/FormularioOrdemServicoes/Index">Formulários de Ordem de Serviço</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-
+                                    <li><a id="LinkMenu" href="/FormularioTMAtividades/Create">Troca de Molde</a></li>
+                                    <li><a id="LinkMenu" href="/FormularioOSAtividades/Create">Ordem de Serviço</a></li>
+                                    <li><a id="LinkMenu" href="/Maquinas">Máquinas</a></li>
+                                    <li><a id="LinkMenu" href="/Moldes">Moldes</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
                     <li id="dropdown1">
-                        <a class="LinkMenu" data-toggle="collapse" href="#dropdown_b">
+                        <a id="LinkMenu" data-toggle="collapse" href="#dropdown_b">
                             <span class="glyphicon glyphicon-dashboard"></span> Produção
                         </a>
                         <!-- Dropdown level 1 -->
                         <div id="dropdown_b" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <ul class="nav">
-                                    <li><a class="LinkMenu" href="#">Ordens de Produção</a></li>
-                                    <li><a class="LinkMenu" href="#">Ficha de Refugo</a></li>
+                                    <li><a id="LinkMenu" href="#">Ordens de Produção</a></li>
+                                    <li><a id="LinkMenu" href="#">Ficha de Refugo</a></li>
 
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li role="presentation"><a class="LinkMenu" href="#"><span class="glyphicon glyphicon-ok"></span> Expedição</a></li>
-                    <li role="presentation"><a class="LinkMenu" href="#"> <span class="glyphicon glyphicon-search"></span> Consultar Formulários</a></li>
-                    <li role="presentation"><a class="LinkMenu" href="#"><span class="glyphicon glyphicon-stats"></span> Relatórios</a></li>
-
-                    <li id="dropdown">
-                        <a class="LinkMenu" data-toggle="collapse" href="#dropdown_c">
-                            <span class="glyphicon glyphicon-edit"></span> Cadastrar
-                        </a>
-                        <!-- Dropdown level 1 -->
-                        <div id="dropdown_c" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul class="nav">
-                                    <li role="presentation"><a class="LinkMenu" href="/Usuarios/Index">Usuários</a></li>
-                                    <li><a class="LinkMenu" href="/Maquinas">Máquinas</a></li>
-                                    <li><a class="LinkMenu" href="/Moldes">Moldes</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-
+                    <li role="presentation"><a id="LinkMenu" href="#"><span class="glyphicon glyphicon-ok"></span> Expedição</a></li>
+                    <li role="presentation"><a id="LinkMenu" href="#"> <span class="glyphicon glyphicon-search"></span> Consultar Formulários</a></li>
+                    <li role="presentation"><a id="LinkMenu" href="#"><span class="glyphicon glyphicon-stats"></span> Relatórios</a></li>
+                    <li role="presentation"><a id="LinkMenu" href="/Usuarios"><span class="glyphicon glyphicon-user"></span> Usuários</a></li>
                 </ul>
 
             </div>
@@ -163,6 +114,6 @@
         </footer>
     </div>
     <!--</div>-->
-
+   
 </body>
 </html>

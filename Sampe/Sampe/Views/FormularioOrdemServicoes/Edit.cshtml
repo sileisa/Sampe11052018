@@ -26,13 +26,13 @@
         });
 
         $("#enable").click(function (event) {
-            // habilita o campo 
+            // habilita o campo
             $("input").prop("disabled", false);
 
         });
 
         $("#disable").click(function (event) {
-            // desabilita o campo 
+            // desabilita o campo
             $("input").prop("disabled", true);
 
         });
@@ -82,14 +82,14 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     @Html.LabelFor(model => model.HoraInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.EditorFor(model => model.HoraInicio, new { htmlAttributes = new {type="time" ,@class = "form-control" } })
+                    @Html.EditorFor(model => model.HoraInicio, new { htmlAttributes = new { type = "time", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.HoraInicio, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     @Html.LabelFor(model => model.HoraFinal, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.EditorFor(model => model.HoraFinal, new { htmlAttributes = new { type = "time" , @class = "form-control" } })
+                    @Html.EditorFor(model => model.HoraFinal, new { htmlAttributes = new { type = "time", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.HoraFinal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -108,14 +108,14 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     @Html.LabelFor(model => model.IntervaloInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.EditorFor(model => model.IntervaloInicio, new { htmlAttributes = new { type = "time" , @class = "form-control" } })
+                    @Html.EditorFor(model => model.IntervaloInicio, new { htmlAttributes = new { type = "time", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.IntervaloInicio, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     @Html.LabelFor(model => model.IntervaloFim, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.EditorFor(model => model.IntervaloFim, new { htmlAttributes = new { type = "time",  @class = "form-control" } })
+                    @Html.EditorFor(model => model.IntervaloFim, new { htmlAttributes = new { type = "time", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.IntervaloFim, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -142,7 +142,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.UsuarioId, "UsuarioId", htmlAttributes: new { @class = "control-label col-md-2" })
                     @Html.DropDownList("UsuarioId", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
-                    @Html.HiddenFor(model=> model.UsuarioId)
+                    @Html.HiddenFor(model => model.UsuarioId)
                     @Html.ValidationMessageFor(model => model.UsuarioId, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -185,14 +185,24 @@
         <button value="Próximo" id="mostrar" class="btn btn-default" name="action">Próximo</button>
 
         <div class="container" id="capaefectos">
-            @foreach (var a in Model.FormularioOSAtividades)
-            {
-                <div class="checkbox" id="check">
-                    <input type="checkbox" value="@a.FormularioOSAtividadeId" name="id">
-                    <label>@a.AtividadeOS.NomeAtvOs</label>
-                </div>
-            }
-            <br />
+            <div class="col-lg-12 col-sm-12">
+                @foreach (var a in Model.FormularioOSAtividades)
+                {
+                    <div class="checkbox" id="check">
+                        @if (a.StatusOS == true)
+                        {
+                            <input type="checkbox" value="@a.FormularioOSAtividadeId" name="id" checked disabled>
+                            <label>@a.AtividadeOS.NomeAtvOs</label>
+                        }
+                        else
+                        {
+                            <input type="checkbox" value="@a.FormularioOSAtividadeId" name="id">
+                            <label>@a.AtividadeOS.NomeAtvOs</label>
+                        }
+                    </div>
+                }
+                <br />
+            </div>
         </div>
 
         <div class="form-group">

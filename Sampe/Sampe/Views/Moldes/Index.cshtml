@@ -29,8 +29,12 @@
                     @Html.DisplayFor(modelItem => item.Cavidade)
                 </td>
                 <td>
-                    <a href="/Moldes/Edit/@item.MoldeId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a href="/Moldes/Delete/@item.MoldeId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+
+
+
+                    @Html.ActionLink("Editar", "Edit", new { id = item.MoldeId }) |
+                    <!--   @Html.ActionLink("Details", "Details", new { id = item.MoldeId }) |-->
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.MoldeId })
                 </td>
             </tr>
             }

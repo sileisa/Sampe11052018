@@ -18,7 +18,9 @@ namespace Sampe.Controllers
         // GET: FormularioTrocaMoldes
         public ActionResult Index()
         {
-            var formularioTrocaMoldes = db.FormularioTrocaMoldes.Include(f => f.Maquina).Include(f => f.Molde).Include(f => f.Usuario);
+
+            //var formularioTrocaMoldes = db.FormularioTrocaMoldes.Include(f => f.Maquina).Include(f => f.Molde).Include(f => f.Usuario);
+            var formularioTrocaMoldes = db.FormularioTrocaMoldes.Include(f => f.Maquina).Include(f => f.Usuario).OrderBy(f=>f.DtRetirada);
             return View(formularioTrocaMoldes.ToList());
         }
 
@@ -49,13 +51,21 @@ namespace Sampe.Controllers
                          on Relacional.AtividadeTMId equals Atividade.AtividadeTMId
                          select Relacional.AtividadeTM;
 
-            var result = busca.ToList();
-            db.Entry(formularioTrocaMolde).Reference(f => f.Molde).Load();
+            var busca3 = from Formulario in db.FormularioTrocaMoldes
+                         where Formulario.FormularioTrocaMoldeId == formularioTrocaMolde.FormularioTrocaMoldeId
+                         join Relacional in db.FormularioMolde
+                         on Formulario.FormularioTrocaMoldeId equals Relacional.FormularioTrocaMoldeId
+                         join Molde in db.Moldes
+                         on Relacional.MoldeId equals Molde.MoldeId
+                         select Relacional.Molde;
+
+            //var user = User.Identity.Name;
+            //db.Entry(formularioTrocaMolde).Reference(f => f.Molde).Load();
             db.Entry(formularioTrocaMolde).Reference(f => f.Maquina).Load();
             db.Entry(formularioTrocaMolde).Reference(f => f.Usuario).Load();
             formularioTrocaMolde.FormularioTMAtividades = busca.ToList();
-            formularioTrocaMolde.AtividadesTM = busca2.ToArray();
-            //var FormularioTMAtividade = db.FormularioTrocaMoldes.Include(f => f.AtividadesTM);
+            formularioTrocaMolde.AtividadesTM = busca2.ToList();
+            formularioTrocaMolde.Moldes = busca3.ToList();           
 
             if (formularioTrocaMolde == null)
             {
@@ -88,7 +98,7 @@ namespace Sampe.Controllers
             }
 
             ViewBag.MaquinaId = new SelectList(db.Maquinas, "MaquinaId", "NomeMaquina", formularioTrocaMolde.MaquinaId);
-            ViewBag.MoldeId = new SelectList(db.Moldes, "MoldeId", "NomeMolde", formularioTrocaMolde.MoldeId);
+            //ViewBag.MoldeId = new SelectList(db.Moldes, "MoldeId", "NomeMolde", formularioTrocaMolde.MoldeId);
             ViewBag.UsuarioId = new SelectList(db.Usuarios, "UsuarioId", "NomeUsuario", formularioTrocaMolde.UsuarioId);
             return View(formularioTrocaMolde);
         }
@@ -117,18 +127,26 @@ namespace Sampe.Controllers
                          on FormularioTMAtividades.AtividadeTMId equals AtividadeTM.AtividadeTMId
                          select FormularioTMAtividades.AtividadeTM;
 
-            var result = busca.ToList();
-            db.Entry(formularioTrocaMolde).Reference(f => f.Molde).Load();
+            var busca3 = from Formulario in db.FormularioTrocaMoldes
+                         where Formulario.FormularioTrocaMoldeId == formularioTrocaMolde.FormularioTrocaMoldeId
+                         join Relacional in db.FormularioMolde
+                         on Formulario.FormularioTrocaMoldeId equals Relacional.FormularioTrocaMoldeId
+                         join Molde in db.Moldes
+                         on Relacional.MoldeId equals Molde.MoldeId
+                         select Relacional.Molde;
+
+            //db.Entry(formularioTrocaMolde).Reference(f => f.Molde).Load();
             db.Entry(formularioTrocaMolde).Reference(f => f.Maquina).Load();
             db.Entry(formularioTrocaMolde).Reference(f => f.Usuario).Load();
             formularioTrocaMolde.FormularioTMAtividades = busca.ToArray();
             formularioTrocaMolde.AtividadesTM = busca2.ToArray();
+            formularioTrocaMolde.Moldes = busca3.ToList();
             if (formularioTrocaMolde == null)
             {
                 return HttpNotFound();
             }
             ViewBag.MaquinaId = new SelectList(db.Maquinas, "MaquinaId", "NomeMaquina", formularioTrocaMolde.MaquinaId);
-            ViewBag.MoldeId = new SelectList(db.Moldes, "MoldeId", "NomeMolde", formularioTrocaMolde.MoldeId);
+            //ViewBag.MoldeId = new SelectList(db.Moldes, "MoldeId", "NomeMolde", formularioTrocaMolde.MoldeId);
             ViewBag.UsuarioId = new SelectList(db.Usuarios, "UsuarioId", "NomeUsuario", formularioTrocaMolde.UsuarioId);
             return View(formularioTrocaMolde);
         }
@@ -142,20 +160,20 @@ namespace Sampe.Controllers
         {
 
             List<FormularioTMAtividade> form = new List<FormularioTMAtividade>();
-           
+                       
             foreach (var x in id)
             {
-                FormularioTMAtividade teste = new FormularioTMAtividade();
-                teste = db.FormularioTMAtividade.Find(x);
-                teste.StatusTM = true;
-                form.Add(teste);
+                FormularioTMAtividade f1 = new FormularioTMAtividade();
+                f1 = db.FormularioTMAtividade.Find(x);
+                f1.StatusTM = true;
+                form.Add(f1);
             }
             
             formularioTrocaMolde.FormularioTMAtividades = form;
-            formularioTrocaMolde.MoldeId = m2.MoldeId;
+           // formularioTrocaMolde.MoldeId = m2.MoldeId;
             formularioTrocaMolde.MaquinaId = m1.MaquinaId;
             formularioTrocaMolde.UsuarioId = u1.UsuarioId;
-            //var a = formularioTrocaMolde.FormularioTMAtividades;
+            var a = formularioTrocaMolde.FormularioTMAtividades;
            
            // if (ModelState.IsValid)
            // {              

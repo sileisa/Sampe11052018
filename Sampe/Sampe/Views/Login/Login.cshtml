@@ -24,7 +24,7 @@
 </head>
 <body id="fundo">
 
-    @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         <div class="container center-block text-center">
@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="input-group col-sm-12 col-md-12">
                                     <!--<span class="input-group-addon glyphicon glyphicon-user" ></span>-->
-                                    <input class="input-validation-error form-control text-box single-line " data-val="true" data-val-required="Preencha este campo" htmlattributes="{ class = form-control text-box single-line }" id="User" name="User" type="text" placeholder="Login">                                    
+                                    <input class="input-validation-error form-control text-box single-line " data-val="true" data-val-required="Preencha este campo" htmlattributes="{ class = form-control text-box single-line }" id="User" name="User" type="text" placeholder="Login">
                                     @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -56,9 +56,7 @@
                             <input type="submit" value="Entrar" class="btn btn-block" id="entrar" />
                             <br />
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>

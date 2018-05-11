@@ -30,7 +30,7 @@ namespace Sampe.Controllers
 
             var atvs = db.FormularioTrocaMoldes.Include(f => f.AtividadesTM);
 
-            db.Entry(formularioTMAtividade.FormularioTrocaMolde).Reference(f => f.Molde).Load();
+            //db.Entry(formularioTMAtividade.FormularioTrocaMolde).Reference(f => f.Molde).Load();
             db.Entry(formularioTMAtividade.FormularioTrocaMolde).Reference(f => f.Maquina).Load();
             db.Entry(formularioTMAtividade.FormularioTrocaMolde).Reference(f => f.Usuario).Load();
             db.Entry(formularioTMAtividade.FormularioTrocaMolde).Collection(f => f.AtividadesTM).Load();
@@ -66,7 +66,7 @@ namespace Sampe.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FormularioTMAtividadeId,FormularioTrocaMoldeId,AtividadeTMId,StatusTM,FormularioTrocaMolde")] FormularioTMAtividade formularioTMAtividade, [Bind(Include = "MoldeId")] Molde m2, [Bind(Include = "MaquinaId")] Maquina m1, [Bind(Include = "UsuarioId")] Usuario u1, [Bind(Include = "AtividadeTMId, NomeAtvTm")] AtividadeTM atividadeTM)
+        public ActionResult Create([Bind(Include = "FormularioTMAtividadeId,FormularioTrocaMoldeId,AtividadeTMId,StatusTM,FormularioTrocaMolde")] FormularioTMAtividade formularioTMAtividade, ICollection<int> MoldeId, [Bind(Include = "MaquinaId")] Maquina m1, [Bind(Include = "UsuarioId")] Usuario u1)
         {
 
             //if (ModelState.IsValid)
@@ -77,7 +77,18 @@ namespace Sampe.Controllers
                 FormularioTrocaMolde form = new FormularioTrocaMolde();
                 form = formularioTMAtividade.FormularioTrocaMolde;
                 formularioTMAtividade.StatusTM = false;
-                formularioTMAtividade.FormularioTrocaMolde.MoldeId = m2.MoldeId;
+
+                //formularioTMAtividade.FormularioTrocaMolde.MoldeId = m2.MoldeId;
+                List<FormularioMolde> molde = new List<FormularioMolde>();
+                foreach (var x in MoldeId)
+                {
+                    FormularioMolde m = new FormularioMolde();
+                    var md = db.Moldes.Find(x);
+                    m.Molde = md;
+                    molde.Add(m);
+                }
+
+                formularioTMAtividade.FormularioTrocaMolde.FormularioMoldes = molde;
                 formularioTMAtividade.FormularioTrocaMolde.MaquinaId = m1.MaquinaId;
                 formularioTMAtividade.FormularioTrocaMolde.UsuarioId = u1.UsuarioId;
                 int[] splTags = lstTags.Split(',').Select(Int32.Parse).ToArray();
@@ -89,7 +100,7 @@ namespace Sampe.Controllers
                 }
                 return RedirectToAction("Index", "FormularioTrocaMoldes");
             }
-            
+
             //}
             //ViewBag.MaquinaId = new SelectList(db.Maquinas, "MaquinaId", "NomeMaquina", formularioTMAtividade.FormularioTrocaMolde.MaquinaId);
             //ViewBag.MoldeId = new SelectList(db.Moldes, "MoldeId", "NomeMolde", formularioTMAtividade.FormularioTrocaMolde.MoldeId);
