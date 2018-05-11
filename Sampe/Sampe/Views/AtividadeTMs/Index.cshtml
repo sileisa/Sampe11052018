@@ -15,6 +15,7 @@
         });
     });
 </script>
+
 <h2>Atividades de Troca de Molde</h2>
 <br />
 
@@ -36,7 +37,7 @@
     </div>
 }
 <br /><br />
-<table class="table">
+<table class="table table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.NomeAtvTm)
@@ -51,9 +52,8 @@
                 @Html.DisplayFor(modelItem => item.NomeAtvTm)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AtividadeTMId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AtividadeTMId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AtividadeTMId })
+                <a href="/AtividadeTMs/Edit/@item.AtividadeTMId" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="/AtividadeTMs/Delete/@item.AtividadeTMId" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
     }

@@ -7,13 +7,13 @@ namespace Sampe.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Sampe040520181554 : IMigrationMetadata
+    public sealed partial class Create : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Sampe040520181554));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Create));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805041854564_Sampe040520181554"; }
+            get { return "201805090552233_Create"; }
         }
         
         string IMigrationMetadata.Source

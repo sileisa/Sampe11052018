@@ -18,7 +18,7 @@ namespace Sampe.Controllers
         // GET: FormularioOrdemServicoes
         public ActionResult Index()
         {
-            var formularioOrdemServicoes = db.FormularioOrdemServicoes.Include(f => f.Maquina).Include(f => f.Usuario);
+            var formularioOrdemServicoes = db.FormularioOrdemServicoes.Include(f => f.Maquina).Include(f => f.Usuario).OrderBy(f=>f.Dt);
             return View(formularioOrdemServicoes.ToList());
         }
 
@@ -110,10 +110,11 @@ namespace Sampe.Controllers
                          on FormularioOSAtividades.AtividadeOSId equals AtividadeOS.AtividadeOSId
                          select FormularioOSAtividades.AtividadeOS;
 
-            db.Entry(formularioOrdemServico).Reference(f => f.Maquina).Load();
-            db.Entry(formularioOrdemServico).Reference(f => f.Usuario).Load();
+            //db.Entry(formularioOrdemServico).Reference(f => f.Maquina).Load();
+            //db.Entry(formularioOrdemServico).Reference(f => f.Usuario).Load();
+
             formularioOrdemServico.FormularioOSAtividades = busca.ToList();
-            formularioOrdemServico.AtividadesOs = busca2.ToArray();
+            formularioOrdemServico.AtividadesOs = busca2.ToList();
             if (formularioOrdemServico == null)
             {
                 return HttpNotFound();
@@ -148,10 +149,6 @@ namespace Sampe.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             //}
-            /*
-            ViewBag.MaquinaId = new SelectList(db.Maquinas, "MaquinaId", "NomeMaquina", formularioOrdemServico.MaquinaId);
-            ViewBag.UsuarioId = new SelectList(db.Usuarios, "UsuarioId", "NomeUsuario", formularioOrdemServico.UsuarioId);
-            return View(formularioOrdemServico);*/
         }
 
         // GET: FormularioOrdemServicoes/Delete/5

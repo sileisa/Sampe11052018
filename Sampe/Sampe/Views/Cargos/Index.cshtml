@@ -31,8 +31,10 @@
                     @Html.DisplayFor(modelItem => item.DescricaoCargo)
                 </td>
                 <td>
-                    <a href="/Cargos/Edit/@item.CargoId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a href="/Cargos/Delete/@item.CargoId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+
+                    @Html.ActionLink("Editar", "Edit", new { id = item.CargoId }) |
+                    <!--   @Html.ActionLink("Details", "Details", new { id = item.CargoId }) |-->
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.CargoId })
                 </td>
             </tr>
     }

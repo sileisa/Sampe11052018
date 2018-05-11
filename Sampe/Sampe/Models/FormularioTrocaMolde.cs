@@ -13,6 +13,7 @@ namespace Sampe
         {
             this.AtividadesTM = new HashSet<AtividadeTM>();
             this.FormularioTMAtividades = new HashSet<FormularioTMAtividade>();
+            this.FormularioMoldes = new HashSet<FormularioMolde>();
         }
         [Key]
         public int FormularioTrocaMoldeId { get; set; }
@@ -24,10 +25,6 @@ namespace Sampe
         public String RetirarInicio { get; set; }
         public String RetirarFim { get; set; }
         public String Supervisor { get; set; }
-
-        [ForeignKey("Molde")]
-        public int MoldeId{ get; set; }
-        public Molde Molde { get; set; }
 
         [ForeignKey("Maquina")]
         public int MaquinaId { get; set; }
@@ -42,5 +39,12 @@ namespace Sampe
 
         public ICollection<FormularioTMAtividade> FormularioTMAtividades { get; set; }
         public ICollection<int> FormularioTMAtividadeId { get; set; }
+
+        public ICollection<Molde> Moldes { get; set; }
+        public ICollection<int> MoldesId { get; set; }
+        public Molde Molde{ get; set; }
+
+        public ICollection<FormularioMolde> FormularioMoldes { get; set; }
+        public ICollection<int> FormularioMoldeId { get; set; }
     }
 }

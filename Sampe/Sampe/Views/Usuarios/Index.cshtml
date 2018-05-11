@@ -47,8 +47,10 @@
                     </td>
 
                     <td>
-                        <a href="/Usuarios/Edit/@item.UsuarioId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="/Usuarios/Delete/@item.UsuarioId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+
+                        @Html.ActionLink("Editar", "Edit", new { id = item.UsuarioId }) |
+                        <!--   @Html.ActionLink("Details", "Details", new { id = item.UsuarioId }) |-->
+                        @Html.ActionLink("Deletar", "Delete", new { id = item.UsuarioId })
                     </td>
                 </tr>
         }

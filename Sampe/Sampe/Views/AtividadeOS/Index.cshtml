@@ -36,7 +36,7 @@
     </div>
 }
 <br /><br />
-<table class="table">
+<table class="table table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.NomeAtvOs)
@@ -51,9 +51,8 @@
                 @Html.DisplayFor(modelItem => item.NomeAtvOs)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AtividadeOSId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AtividadeOSId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AtividadeOSId })
+                <a href="/AtividadeOS/Edit/@item.AtividadeOSId" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="/AtividadeOS/Delete/@item.AtividadeOSId" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
     }

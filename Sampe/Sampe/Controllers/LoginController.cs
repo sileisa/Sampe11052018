@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using Sampe.Models;
 
 namespace Sampe.Controllers
@@ -37,10 +36,9 @@ namespace Sampe.Controllers
         }
 
         // GET: Login/Create
-        public ActionResult Login(string returnURL)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnURL;
-            return View(new Login());
+            return View();
         }
 
         // POST: Login/Create
@@ -48,47 +46,26 @@ namespace Sampe.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "LoginId,User,Senha")] Login login, String returnUrl)
+        public ActionResult Login([Bind(Include = "LoginId,User,Senha")] Login login)
         {
-            if (ModelState.IsValid)
+            //Usuario usuario = new Usuario();
+            var usuarios = db.Usuarios;
+
+            foreach (var item in usuarios)
             {
-                using (SampeContext db = new SampeContext())
-                {
-                    //Usuario usuario = new Usuario();
-                    var usuarios = db.Usuarios;
-
-                    foreach (var item in usuarios)
-                    {
-                        if (login.User == item.Login && login.Senha == item.Senha)
-                        {
-                            FormsAuthentication.SetAuthCookie(item.Login, false);
-                            if (Url.IsLocalUrl(returnUrl)
-                              && returnUrl.Length > 1
-                             && returnUrl.StartsWith("/")
-                             && !returnUrl.StartsWith("//")
-                              && returnUrl.StartsWith("/\\"))
-                            {
-                                return Redirect(returnUrl);
-                            }
-                            /*código abaixo cria uma session para armazenar o nome do usuário*/
-                            Session["Nome"] = item.NomeUsuario;
-                            /*código abaixo cria uma session para armazenar o sobrenome do usuário*/
-                            Session["Sobrenome"] = item.SobrenomeUsuario;
-                            /*código abaixo cria uma session para armazenar o id do usuário*/
-                            Session["UsuarioId"] = item.UsuarioId;
-                            /*retorna para a tela inicial do Home*/
-                            return RedirectToAction("Index", "Home");
-                        }
-                        else
-                        {
-
-                            ModelState.AddModelError("User", "Login e/ou senha inválidos");
-                        }
-
-                    }
+                if (login.User == item.Login && login.Senha == item.Senha)
+                {                   
+                    return RedirectToAction("Index","Home");
                 }
+                else
+                {
+
+                    ModelState.AddModelError("User", "Login e/ou senha inválidos");
+                }
+
             }
-            return View(login);
+
+            return View("Login");
         }
 
         // GET: Login/Edit/5

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using Sampe;
 using Sampe.Models;
 
@@ -21,15 +20,12 @@ namespace Sampe.Controllers
         {
             var usuarios = db.Usuarios.Include(u => u.Cargo);
             ViewBag.CargoId = new SelectList(db.Cargoes, "CargoId", "NomeCargo");
-            db.Cargoes.Load();
-            return View(db.Usuarios.ToList().OrderBy(u => u.NomeUsuario));
+            return View(usuarios.ToList());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "UsuarioId,NomeUsuario,SobrenomeUsuario,Login,Senha,Hierarquia,CargoId")] Usuario usuario)
         {
-            //    , [Bind(Include = "CargoId")]Cargo cargo
-            //usuario.CargoId = cargo.CargoId;
             if (ModelState.IsValid)
             {
                 db.Usuarios.Add(usuario);
@@ -40,40 +36,39 @@ namespace Sampe.Controllers
             ViewBag.CargoId = new SelectList(db.Cargoes, "CargoId", "NomeCargo", usuario.CargoId);
             return View(usuario);
         }
-
-        public ActionResult AlterarSenha(int? id)
+        // GET : Usuarios/Login
+        public ActionResult Login()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-           
-            return View(usuario);
+            return View();
         }
-
-        // POST: Usuarios/Edit/5
-        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
-        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AlterarSenha([Bind(Include = "UsuarioId,NomeUsuario,SobrenomeUsuario,Login,Senha,Hierarquia,CargoId")] Usuario usuario)
+        public ActionResult Login([Bind(Include = "Login,Senha")] Usuario usuario)
         {
-            if (ModelState.IsValid)
+            var usuarios = db.Usuarios;
+
+            foreach (var item in usuarios)
             {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (usuario.Login == item.Login && usuario.Senha == item.Senha)
+                {
+                    return RedirectToAction("PagInicial");
+                }
+                else
+                {
+                 
+                    ModelState.AddModelError("Login", "Login e/ou senha inválidos");
+                }
+
             }
-            
-            return View(usuario);
+
+            return View("Login");
         }
 
-
+        public ActionResult PagInicial(int? id)
+        {
+            Usuario usuario = db.Usuarios.Find(id);
+            return View();
+        }
         // GET: Usuarios/Details/5
         public ActionResult Details(int? id)
         {
@@ -82,7 +77,6 @@ namespace Sampe.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Usuario usuario = db.Usuarios.Find(id);
-            db.Entry(usuario).Reference(u => u.Cargo).Load();
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -138,7 +132,6 @@ namespace Sampe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UsuarioId,NomeUsuario,SobrenomeUsuario,Login,Senha,Hierarquia,CargoId")] Usuario usuario)
         {
-            
             if (ModelState.IsValid)
             {
                 db.Entry(usuario).State = EntityState.Modified;

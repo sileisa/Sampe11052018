@@ -18,13 +18,28 @@
             @Html.DisplayFor(model => model.Maquina.NomeMaquina)
         </dd>
 
+
         <dt>
-            @Html.DisplayNameFor(model => model.Molde.NomeMolde)
+            Moldes:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Molde.NomeMolde)
+            <table class="table-bordered">
+                <tr>
+                    <th>Molde Retirado</th>
+                    <th>Molde Colocado</th>
+                </tr>
+                <tr>
+                    @foreach (var x in Model.Moldes)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => x.NomeMolde) (@Html.DisplayFor(modelItem=>x.Cavidade))
+                        </td>
+                    }
+                </tr>
+            </table>
         </dd>
+
 
         <dt>
             @Html.DisplayNameFor(model => model.Usuario.NomeUsuario)

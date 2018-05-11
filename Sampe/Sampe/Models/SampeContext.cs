@@ -40,5 +40,7 @@ namespace Sampe.Models
         public System.Data.Entity.DbSet<Sampe.FormularioTMAtividade> FormularioTMAtividade { get; set; }
 
         public System.Data.Entity.DbSet<Sampe.Login> Logins { get; set; }
+
+        public System.Data.Entity.DbSet<Sampe.FormularioMolde> FormularioMolde { get; set; }
     }
 }
