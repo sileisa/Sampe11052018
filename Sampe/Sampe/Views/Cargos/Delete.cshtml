@@ -1,0 +1,45 @@
+﻿@model Sampe.Cargo
+
+@{
+    ViewBag.Title = "Deletar Cargo";
+}
+<div class="container ">
+    <div class="col s12 m8 l9">
+        <br />
+        <h2>Deletar Cargo</h2>
+
+        <h6>Tem certeza que deseja excluir?</h6>
+        <div class="row">
+
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                   Cargo
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NomeCargo)
+                </dd>
+
+                <dt>
+                   Descrição
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DescricaoCargo)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Deletar" class="btn btn-default" />
+                    <a class="btn " href="/Cargos/Index">Voltar</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

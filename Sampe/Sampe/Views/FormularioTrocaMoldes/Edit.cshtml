@@ -1,0 +1,131 @@
+﻿@model Sampe.FormularioTrocaMolde
+
+@{
+    ViewBag.Title = "Preencher";
+}
+<script>
+    $(":disabled", $('#frmMain')).removeAttr("disabled");
+</script>
+<h2>Preencher</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal container">
+        <h4>Formulário de Troca de Molde</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.FormularioTrocaMoldeId)
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoldeId, "Molde", htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.DropDownList("MoldeId", null, htmlAttributes: new { @class = "form-control ", disabled = "disabled" })
+                    @Html.HiddenFor(model => model.MoldeId)
+                    @Html.ValidationMessageFor(model => model.MoldeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaquinaId, "Máquina", htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.DropDownList("MaquinaId", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+                    @Html.HiddenFor(model => model.MaquinaId)
+                    @Html.ValidationMessageFor(model => model.MaquinaId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <h4>Retirar o Molde</h4>          
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DtRetirada, "Data", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.DtRetirada,  new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    @Html.ValidationMessageFor(model => model.DtRetirada, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RetirarInicio,"Hora Início", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.RetirarInicio, new { htmlAttributes = new { type = "time", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RetirarInicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RetirarFim, "Hora Fim",htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.RetirarFim, new { htmlAttributes = new { type = "time", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RetirarFim, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <h4>Colocar o Molde</h4>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DtColocar,"Data", htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.EditorFor(model => model.DtColocar, new { htmlAttributes = new { type = "date", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DtColocar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ColocarInicio,"Hora Início", htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.EditorFor(model => model.ColocarInicio, new { htmlAttributes = new { type = "time", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ColocarInicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ColocarFim, "Hora Fim",htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.EditorFor(model => model.ColocarFim, new { htmlAttributes = new { type = "time", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ColocarFim, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Supervisor, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.EditorFor(model => model.Supervisor, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    @Html.ValidationMessageFor(model => model.Supervisor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UsuarioId, "Executor", htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.DropDownList("UsuarioId", null, htmlAttributes: new { @class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.UsuarioId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <h4>Atividades</h4>
+        <div class="container" id="capaefectos">
+            @foreach (var a in Model.FormularioTMAtividades)
+            {
+            <div class="checkbox" id="check">
+                <input type="checkbox" value="@a.FormularioTMAtividadeId" name="id">
+                <label>@a.AtividadeTM.NomeAtvTm</label>
+            </div>
+            }
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-12">
+                <br />
+                <input type="submit" value="Salvar" class="btn btn-default text-center" />
+                <input type="submit" value="Voltar" class="btn btn-default text-center" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

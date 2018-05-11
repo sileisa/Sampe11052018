@@ -1,0 +1,104 @@
+﻿@model Sampe.FormularioTrocaMolde
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FormularioTrocaMolde</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Maquina.NomeMaquina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maquina.NomeMaquina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Molde.NomeMolde)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Molde.NomeMolde)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.NomeUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.NomeUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtRetirada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DtRetirada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtColocar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DtColocar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ColocarInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ColocarInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ColocarFim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ColocarFim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RetirarInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RetirarInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RetirarFim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RetirarFim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supervisor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supervisor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

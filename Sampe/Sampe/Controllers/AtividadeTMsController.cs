@@ -1,0 +1,141 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Sampe.Models;
+
+namespace Sampe.Controllers
+{
+    public class AtividadeTMsController : Controller
+    {
+        private SampeContext db = new SampeContext();
+
+        // GET: AtividadeTMs
+        public ActionResult Index()
+        {
+            return View(db.AtividadeTMs.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "AtividadeTMId,NomeAtvTm")] AtividadeTM atividadeTm)
+        {
+            if (ModelState.IsValid)
+            {
+                db.AtividadeTMs.Add(atividadeTm);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(atividadeTm);
+        }
+
+        // GET: AtividadeTMs/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AtividadeTM atividadeTM = db.AtividadeTMs.Find(id);
+            if (atividadeTM == null)
+            {
+                return HttpNotFound();
+            }
+            return View(atividadeTM);
+        }
+
+        // GET: AtividadeTMs/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: AtividadeTMs/Create
+        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
+        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "AtividadeTMId,NomeAtvTm")] AtividadeTM atividadeTM)
+        {
+            if (ModelState.IsValid)
+            {
+                db.AtividadeTMs.Add(atividadeTM);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(atividadeTM);
+        }
+
+        // GET: AtividadeTMs/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AtividadeTM atividadeTM = db.AtividadeTMs.Find(id);
+            if (atividadeTM == null)
+            {
+                return HttpNotFound();
+            }
+            return View(atividadeTM);
+        }
+
+        // POST: AtividadeTMs/Edit/5
+        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
+        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "AtividadeTMId,NomeAtvTm")] AtividadeTM atividadeTM)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(atividadeTM).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(atividadeTM);
+        }
+
+        // GET: AtividadeTMs/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AtividadeTM atividadeTM = db.AtividadeTMs.Find(id);
+            if (atividadeTM == null)
+            {
+                return HttpNotFound();
+            }
+            return View(atividadeTM);
+        }
+
+        // POST: AtividadeTMs/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            AtividadeTM atividadeTM = db.AtividadeTMs.Find(id);
+            db.AtividadeTMs.Remove(atividadeTM);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

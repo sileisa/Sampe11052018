@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Sampe.AtividadeTM>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+    $(document).ready(function () {
+        $("#enviar").click(function (e) {
+            e.preventDefault();
+            toastr.success("Atividade Cadastrada");
+
+            setTimeout(function () {
+                $("#novaAtv").submit();
+            }, 2000)
+        });
+    });
+</script>
+<h2>Atividades de Troca de Molde</h2>
+<br />
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "novaAtv" }))
+{
+    @Html.AntiForgeryToken()
+    AtividadeTM atividadeTM = new AtividadeTM();
+    <div class="container ">
+        <div class="form-group">
+            <label class="control-label col-md-2">Nova Atividade</label>
+            <div class="col-md-8">
+                @Html.EditorFor(AtividadeTM => atividadeTM.NomeAtvTm, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(AtividadeTM => atividadeTM.NomeAtvTm, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Cadastrar" id="enviar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+<br /><br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeAtvTm)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeAtvTm)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AtividadeTMId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AtividadeTMId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AtividadeTMId })
+            </td>
+        </tr>
+    }
+
+</table>
+

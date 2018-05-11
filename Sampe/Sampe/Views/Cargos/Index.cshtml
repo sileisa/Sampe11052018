@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Sampe.Cargo>
+
+@{
+    ViewBag.Title = "Cargos";
+}
+
+<div class="container ">
+    <div class="col s12 m8 l9">
+        <br />
+        <h6>Cargos</h6>
+
+        <div class="divider"></div>
+        <table class="table">
+            <tr>
+                <th>
+                    Cargo
+                </th>
+                <th>
+                    Descrição
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescricaoCargo)
+                </td>
+                <td>
+                    <a href="/Cargos/Edit/@item.CargoId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="/Cargos/Delete/@item.CargoId" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+    }
+
+        </table>
+        <div class="row center-align">
+            <a class="btn " href="/Cargos/Create">Novo Cargo</a>
+        </div>
+    </div>
+</div>

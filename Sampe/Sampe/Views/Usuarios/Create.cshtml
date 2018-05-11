@@ -1,0 +1,89 @@
+﻿@model Sampe.Usuario
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container ">
+        <div class="col-md-9">
+            <h2>Novo Usuário</h2>
+            <!-- <h4>Usuário</h4>-->
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomeUsuario, "Nome", htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NomeUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NomeUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SobrenomeUsuario, "Sobrenome", htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SobrenomeUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SobrenomeUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="" for="Login">Login</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="Preencha este campo" id="Login" name="Login" type="text" onfocus="this.value = NomeUsuario.value">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Login" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class=" form-group">
+                @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class=" col-md-10">
+
+                    <input class="form-control disabled" data-val="true" data-val-required="Preencha este campo" id="Senha" name="Senha" type="password" value="123456">
+                    @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Hierarquia, htmlAttributes: new { @class = "col s12 l4" })
+                <div class="col s12 l4  ">
+                    <select class="browser-default" id="Hierarquia" name="Hierarquia">
+                        <option value="Acesso Total">Acesso Total</option>
+                        <option value="Acesso Administrador">Acesso Administrador</option>
+                        <option value="Acesso Supervisor">Acesso Supervisor</option>
+                        <option value="Acesso Produção">Acesso Produção</option>
+                    </select>
+
+                    @Html.ValidationMessageFor(model => model.Hierarquia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CargoId, "Cargo", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CargoId", null, htmlAttributes: new { @class = "browser-default" })
+                    @Html.ValidationMessageFor(model => model.CargoId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Cadastrar" class="btn btn-default" />
+                    <a class="btn " href="/Usuarios/Index">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
